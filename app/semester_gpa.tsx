@@ -36,11 +36,20 @@ export default function Second() {
   const print = () => {
     console.log('Semester:', semester);
     console.log('Courses:', courses);
-    // Toast.show({
-    //   type: 'success',
-    //   text1: 'Success!',
-    //   text2: 'Your data was saved.',
-    // });
+  }
+
+  const addCourse = () => {
+    console.log('Semester:', semester);
+    console.log('Courses:', courses);
+
+    if (semester === null || typeof semester !== 'number') {
+      Toast.show({
+        type: 'error',
+        text1: 'Warning',
+        text2: 'Please enter a valid semester number to add courses.',
+      });
+      return;
+    }
     setCourses([...courses, {}]); // Add a new course entry
     scrollRef.current?.scrollToEnd({ animated: true });
   }
@@ -118,7 +127,7 @@ export default function Second() {
 
             <TouchableOpacity
               className="flex-row items-center justify-center mt-6 border-2 border-gray-300 rounded-xl py-3"
-              onPress={() => {print()}}
+              onPress={() => {addCourse()}}
             >
               <icons.add fill={'#4b5563'} width={24} height={24} />
               <Text className="text-gray-600 font-semibold pl-1">Add More Courses</Text>
