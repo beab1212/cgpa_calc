@@ -32,11 +32,10 @@ export default function Second() {
   const [courses, setCourses] = useState<Array<any>>([]);
 
   const scrollRef = useRef<ScrollView>(null);
-
-  const print = () => {
-    console.log('Semester:', semester);
-    console.log('Courses:', courses);
-  }
+  const [semesterReport, setSemesterReport] = useState<any>({
+    percentage: null,
+    sgpa: null,
+  });
 
   const addCourse = () => {
     console.log('Semester:', semester);
@@ -62,6 +61,47 @@ export default function Second() {
     updatedCourses[index][field] = value;
     setCourses(updatedCourses);
   };
+  
+  const calculateSGPA = () => {
+    if (courses.length === 0) {
+      Toast.show({
+        type: 'error',
+        text1: 'Warning',
+        text2: 'Please add at least one course to calculate SGPA.',
+      });
+      return;
+    }
+
+    // Example calculation logic
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    courses.forEach(course => {
+      const grade = parseFloat(course.grade || '0');
+      const credit = parseFloat(course.credit || '0');
+      if (!isNaN(grade) && !isNaN(credit)) {
+        totalPoints += grade * credit;
+        totalCredits += credit;
+      }
+    });
+
+    const sgpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : '0.00';
+    
+    // saveSemester({ semester, sgpa, courses });
+    setSemesterReport({
+      percentage: ((parseFloat(sgpa) * 100) / 4).toFixed(2) + '%', // conversion to percentage
+      sgpa,
+    });
+    console.log(semester, sgpa, courses);
+    
+    
+    Toast.show({
+      type: 'success',
+      text1: 'SGPA Calculated',
+      text2: `Your SGPA for Semester ${semester} is ${sgpa}`,
+    });
+  };
+
 
   return (
     <>
@@ -107,7 +147,21 @@ export default function Second() {
                   className="border border-gray-300 rounded-lg px-3 py-2 w-24 text-center mr-2"
                   placeholder="Grade"
                   value={_.grade || ''}
-                  onChange={(text) => { updateCourse(i, 'grade', text.nativeEvent.text); }}
+                  onChange={(text) => {
+                    if (text.nativeEvent.text === '') {
+                      updateCourse(i, 'grade', '0');
+                      return;
+                    }
+                    if (!/^[0-4](\.\d{1,2})?$/.test(text.nativeEvent.text)) {
+                      Toast.show({
+                        type: 'error',
+                        text1: 'Invalid Grade',
+                        text2: 'Please enter a valid grade between 0.00 and 4.00.',
+                      });
+                      return;
+                    }
+                    updateCourse(i, 'grade', text.nativeEvent.text);
+                  }}
 
                 />
                 <TextInput
@@ -138,16 +192,19 @@ export default function Second() {
         <View className='p-4 bg-[#f8fafb] shadow-md rounded-lg mb-4 h-56'>
           <View className='flex-row items-center justify-between mb-6 border-b border-gray-200 pb-4'>
             <Text className='font-bold text-gray-400'>Your SGPA</Text>
-            <Text className='font-bold'>3.67</Text>
+            <Text className='font-bold'>{semesterReport.sgpa ? semesterReport.sgpa : 'N/A'}</Text>
           </View>
 
           <View className='flex-row items-center justify-between mb-2'>
             <Text className='font-bold text-gray-400'>Percentage</Text>
-            <Text className='font-bold'>3.67</Text>
+            <Text className='font-bold'>{semesterReport.percentage ? semesterReport.percentage : 'N/A'}</Text>
           </View>
 
           <TouchableOpacity className='bg-gray-400z p-4 mx-1 mt-4 rounded-lg flex-row border-2 border-gray-300 items-center justify-center'
-            onPress={() => {scrollRef.current?.scrollToEnd({ animated: true })}}
+            onPress={() => {
+              scrollRef.current?.scrollToEnd({ animated: true });
+              calculateSGPA();
+            }}
           >
             <icons.calculator fill={'#4b5563'} width={24} height={24} />
             <Text className='text-gray-600 font-semibold pl-1'>Calculate SGPA</Text>

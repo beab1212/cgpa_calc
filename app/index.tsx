@@ -3,17 +3,22 @@ import { View, Text, Button, Image, TouchableOpacity, Dimensions } from 'react-n
 import { LineChart } from 'react-native-chart-kit';
 import { useNavigation } from 'expo-router';
 import { icons, images } from '../assets';
+import SideMenu from '../components/side_menu';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 function CustomHeader() {
+  const { toggleMenu } = useGlobalContext();
   return (
     <View className='flex-row justify-between'>
       <View className='flex-row items-center'>
-        <Image
-          source={{ uri: 'https://i.pravatar.cc/40' }}
-          style={{ width: 32, height: 32, borderRadius: 16, marginRight: 10}}
-        />
+        <TouchableOpacity onPress={toggleMenu}>
+          <Image
+            source={{ uri: 'https://i.pravatar.cc/40' }}
+            style={{ width: 32, height: 32, borderRadius: 16, marginRight: 10}}
+          />
+        </TouchableOpacity>
         <Text className='text-[18px] font-semibold text-[#7572b0]'>CGPA - Grade Calculator</Text>
       </View>
       {/* <Button title="Login" onPress={() => {}} /> */}
@@ -28,7 +33,7 @@ export default function Home() {
     <>
       <Stack.Screen options={{ headerTitle: () => <CustomHeader /> }} />
       <View className='flex-1 items-center pt-4'>
-
+        <SideMenu toggle={true} close={false} />
 
         <View className='mx-4 py-2 bg-white shadow-md rounded-lg mb-4 w-11/12'>
           <Text className='font-bold text-xl px-8 py-2 text-gray-700'>Your Progress</Text>
