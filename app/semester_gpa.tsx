@@ -6,7 +6,9 @@ import { icons } from '../assets';
 import { useRef, useState } from 'react';
 import { useGlobalContext } from '../context/GlobalProvider';
 
-function CustomHeader() {
+function CustomHeader({ semester, subjects }: { semester: number | null; subjects?: Array<any> }) {
+  const { saveSemester, data } = useGlobalContext();
+
   return (
     <View className='flex-row justify-between p-0'>
       <Text className='text-lg font-bold text-gray-900 -ml-4'>SGPA</Text>
@@ -17,7 +19,7 @@ function CustomHeader() {
           <Text className="text-[#7572b0] font-semibold text-base pl-1">Share</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className="p-2 rounded-lg active:opacity-70">
+        <TouchableOpacity className="p-2 rounded-lg active:opacity-70" onPress={() => saveSemester(semester, subjects)}>
           <icons.save fill="#7572b0" width={22} height={22} />
         </TouchableOpacity>
       </View>
@@ -72,7 +74,7 @@ export default function Second() {
       return;
     }
 
-    // Example calculation logic
+    // calculation logic
     let totalCredits = 0;
     let totalPoints = 0;
 
@@ -105,7 +107,7 @@ export default function Second() {
 
   return (
     <>
-      <Stack.Screen options={{ headerTitle: () => <CustomHeader /> }} />
+      <Stack.Screen options={{ headerTitle: () => <CustomHeader semester={semester} subjects={courses} /> }} />
       <View className='flex-1'>
         <ScrollView className="flex-1 bg-white px-4 pt-4" ref={scrollRef}>
           <View className='z-30 absolute -top-10 right-0 left-0 px-4'>

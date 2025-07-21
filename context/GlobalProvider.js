@@ -89,7 +89,7 @@ export const GlobalProvider = ({ children }) => {
     try {
       const jsonValue = JSON.stringify(data);
       await AsyncStorage.setItem('grade_app_data', jsonValue);
-      console.log('Data saved successfully:', newData);
+      console.log('Data saved successfully:', jsonValue);
     } catch (e) {
       console.error('Error saving data:', e);
     }
@@ -121,13 +121,7 @@ export const GlobalProvider = ({ children }) => {
       });
       return;
     }
-    // Calculate total credits and grade points
-    const totalCredits = subjects.reduce((acc, subject) => acc + (subject.credit || 0), 0);
-    const totalGradePoints = subjects.reduce((acc, subject) => {
-      const gradePoint = subject.grade ? convertGradeToPoint(subject.grade) * (subject.credit || 0) : 0;
-      return acc + gradePoint;
-    }, 0);
-    const gpa = totalCredits > 0 ? (totalGradePoints / totalCredits).toFixed(2) : 0;
+
     const convertGradeToPoint = (grade) => {
       switch (grade) {
         case 'A': return 4.0;
@@ -142,16 +136,40 @@ export const GlobalProvider = ({ children }) => {
         default: return 0.0; // Default to 0 for invalid grades
       }
     };
-    // Update the data state with the new semester
+
+     // calculation logic
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    subjects.forEach(course => {
+      const grade = parseFloat(course.grade || '0');
+      const credit = parseFloat(course.credit || '0');
+      if (!isNaN(grade) && !isNaN(credit)) {
+        totalPoints += grade * credit;
+        totalCredits += credit;
+      }
+    });
+
+    const gpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : '0.00';
 
     setData((prevData) => ({
       ...prevData,
       semesterGrades: {
         ...prevData.semesterGrades,
-        [semesterNumber]: { subjects: subjects || [] }
+        [semesterNumber]: { 
+          subjects: subjects || [],
+          totalCredits,
+          totalPoints,
+          gpa
+        }
       }
     }));
     saveData();
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: `Semester ${semesterNumber} saved successfully!`,
+    });
     console.log(`Semester ${semesterNumber} added with subjects:`, subjects);
   };
 
