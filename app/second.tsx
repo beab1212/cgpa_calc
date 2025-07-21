@@ -1,17 +1,41 @@
-
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Stack } from 'expo-router';
-import { View, Text, TouchableOpacity, ScrollView, LayoutAnimation, Platform, UIManager } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, LayoutAnimation, Platform, UIManager, Share } from 'react-native';
+import { captureRef } from 'react-native-view-shot';
+import * as Sharing from 'expo-sharing';
+import * as MediaLibrary from 'expo-media-library';
 import { icons } from '../assets';
 import { useGlobalContext } from '../context/GlobalProvider';
 
-function CustomHeader() {
+function CustomHeader({ viewRef }: { viewRef: React.RefObject<ScrollView | null> }) {
+
+  const shareImage = async () => {
+    // add logo to the image
+    
+
+    const permission = await MediaLibrary.requestPermissionsAsync();
+    if (!permission.granted) return;
+
+    const uri = await captureRef(viewRef, {
+      format: 'png',
+      quality: 1,
+    });
+
+    if (await Sharing.isAvailableAsync()) {
+      await Sharing.shareAsync(uri, {
+        dialogTitle: 'Share your SGPA Card',
+      });
+    } else {
+      alert('Sharing not available on this device');
+    }
+  };
+
   return (
     <View className='flex-row justify-between p-0'>
       <Text className='text-lg font-bold text-gray-900 -ml-4'>CGPA</Text>
       
       <View className="flex-row items-center px-2 space-x-4">
-        <TouchableOpacity className="flex-row items-center p-2 rounded-lg active:opacity-70">
+        <TouchableOpacity className="flex-row items-center p-2 rounded-lg active:opacity-70" onPress={async () => shareImage()}>
           <icons.share fill="#7572b0" width={22} height={22} />
           <Text className="text-[#7572b0] font-semibold text-base pl-1">Share</Text>
         </TouchableOpacity>
@@ -40,6 +64,7 @@ if (Platform.OS === 'android') {
 export default function Second() {
   const { data } = useGlobalContext();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const viewRef = useRef<ScrollView>(null);
 
   const toggleDropdown = (key: string) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -51,13 +76,13 @@ export default function Second() {
 
   return (
     <>
-      <Stack.Screen options={{ headerTitle: () => <CustomHeader /> }} />
+      <Stack.Screen options={{ headerTitle: () => <CustomHeader viewRef={viewRef} /> }} />
       <View className="flex-1 bg-white">
         <Text className="text-sm text-gray-500 mb-4 py-4 px-6 bg-blue-100">
           You have to enter at least 2 of your semester "SGPA" to calculate CGPA
         </Text>
 
-        <ScrollView className="flex-1 px-4">
+        <ScrollView className="flex-1 px-4" ref={viewRef}>
           {(data?.semesterGrades && Object.keys(data.semesterGrades).length > 0) ? (
             Object.keys(data?.semesterGrades || {}).map((key) => {
               const semester = data.semesterGrades[key];

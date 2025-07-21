@@ -34,19 +34,6 @@ const templateData = {
       totalGradePoints: 0,
       gpa: 0,
     
-    },
-    3: {
-      subjects: [
-      { name: 'Advanced Mathematics', grade: 4, credit: 3 },
-      { name: 'Quantum Physics', grade: 3.3, credit: 4 },
-      { name: 'Organic Chemistry', grade: 3.7, credit: 3 },
-      { name: 'Data Structures', grade: 4, credit: 4 },
-      { name: 'Literature', grade: 3, credit: 2 },
-      { name: 'World History', grade: 3.3, credit: 3 },
-      ],
-      totalCredits: 19,
-      totalGradePoints: 0,
-      gpa: 0,
     }
   },
   gradingScales: {
