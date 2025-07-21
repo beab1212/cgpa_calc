@@ -119,7 +119,7 @@ export default function Second() {
             <View className="flex-row items-center justify-between mb-6 border-b border-gray-200 pb-4">
               <Text className="text-lg font-semibold text-gray-900">SGPA Calculator</Text>
               <TouchableOpacity>
-                <icons.add fill={'#4b5563'} width={24} height={24} />
+                {/* <icons.add fill={'#4b5563'} width={24} height={24} /> */}
               </TouchableOpacity>
             </View>
             
