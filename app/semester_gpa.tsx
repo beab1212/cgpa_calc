@@ -149,15 +149,18 @@ export default function Second() {
                   value={_.grade || ''}
                   onChange={(text) => {
                     if (text.nativeEvent.text === '') {
-                      updateCourse(i, 'grade', '0');
+                      updateCourse(i, 'grade', '');
                       return;
                     }
-                    if (!/^[0-4](\.\d{1,2})?$/.test(text.nativeEvent.text)) {
+
+                    const num = parseFloat(text.nativeEvent.text) || 0;
+                    if (!(num >= 0 && num <= 4)) {
                       Toast.show({
                         type: 'error',
                         text1: 'Invalid Grade',
                         text2: 'Please enter a valid grade between 0.00 and 4.00.',
                       });
+
                       return;
                     }
                     updateCourse(i, 'grade', text.nativeEvent.text);

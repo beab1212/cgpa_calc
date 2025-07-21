@@ -7,112 +7,112 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 const GlobalContext = createContext();
 
 const templateData = {
-    semesterGrades: {
-      1: { 
-          subjects: [
-            { name: 'Mathematics', grade: 'A', credit: 3 },
-            { name: 'Physics', grade: 'B+', credit: 4 },
-            { name: 'Chemistry', grade: 'A-', credit: 3 },
-            { name: 'Computer Science', grade: 'A', credit: 4 },
-            { name: 'English', grade: 'B', credit: 2 },
-            { name: 'History', grade: 'B+', credit: 3 },
-          ],
-          totalCredits: 19,
-          totalGradePoints: 0,
-          gpa: 0,
-        },
-      2: {
-          subjects: [
-            { name: 'Biology', grade: 'A', credit: 3 },
-            { name: 'Statistics', grade: 'B+', credit: 4 },
-            { name: 'Economics', grade: 'A-', credit: 3 },
-            { name: 'Psychology', grade: 'A', credit: 4 },
-            { name: 'Philosophy', grade: 'B', credit: 2 },
-            { name: 'Sociology', grade: 'B+', credit: 3 },
-          ],
-          totalCredits: 19,
-          totalGradePoints: 0,
-          gpa: 0,
-        
-        },
-      3: {
-          subjects: [
-            { name: 'Advanced Mathematics', grade: 'A', credit: 3 },
-            { name: 'Quantum Physics', grade: 'B+', credit: 4 },
-            { name: 'Organic Chemistry', grade: 'A-', credit: 3 },
-            { name: 'Data Structures', grade: 'A', credit: 4 },
-            { name: 'Literature', grade: 'B', credit: 2 },
-            { name: 'World History', grade: 'B+', credit: 3 },
-          ],
-          totalCredits: 19,
-          totalGradePoints: 0,
-          gpa: 0,
-        },
-      4: {
-          subjects: [
-            { name: 'Genetics', grade: 'A', credit: 3 },
-            { name: 'Probability Theory', grade: 'B+', credit: 4 },
-            { name: 'Microeconomics', grade: 'A-', credit: 3 },
-            { name: 'Cognitive Psychology', grade: 'A', credit: 4 },
-            { name: 'Ethics', grade: 'B', credit: 2 },
-            { name: 'Cultural Studies', grade: 'B+', credit: 3 },
-          ],
-          totalCredits: 19,
-          totalGradePoints: 0,
-          gpa: 0,
-        },
-      5: {
-          subjects: [
-            { name: 'Linear Algebra', grade: 'A', credit: 3 },
-            { name: 'Thermodynamics', grade: 'B+', credit: 4 },
-            { name: 'Inorganic Chemistry', grade: 'A-', credit: 3 },
-            { name: 'Algorithms', grade: 'A', credit: 4 },
-            { name: 'Creative Writing', grade: 'B', credit: 2 },
-            { name: 'Modern History', grade: 'B+', credit: 3 },
-          ],
-          totalCredits: 19,
-          totalGradePoints: 0,
-          gpa: 0,
-        },
-      6: {
-          subjects: [
-            { name: 'Differential Equations', grade: 'A', credit: 3 },
-            { name: 'Electromagnetism', grade: 'B+', credit: 4 },
-            { name: 'Physical Chemistry', grade: 'A-', credit: 3 },
-            { name: 'Operating Systems', grade: 'A', credit: 4 },
-            { name: 'Rhetoric', grade: 'B', credit: 2 },
-            { name: 'Ancient Civilizations', grade: 'B+', credit: 3 },
-          ],
-          totalCredits: 19,
-          totalGradePoints: 0,
-          gpa: 0,
-        },
-    },
-    gradingScales: {
-      ethiopianUniversityGradingScale: [
-        { grade: 'A+', min: 90, max: 100, weight: 4 },
-        { grade: 'A',  min: 85, max: 89,  weight: 4 },
-        { grade: 'A-', min: 80, max: 84,  weight: 3.75 },
-        { grade: 'B+', min: 75, max: 79,  weight: 3.5 },
-        { grade: 'B',  min: 70, max: 74,  weight: 3 },
-        { grade: 'B-', min: 65, max: 69,  weight: 2.75 },
-        { grade: 'C+', min: 60, max: 64,  weight: 2.5 },
-        { grade: 'C',  min: 50, max: 59,  weight: 2 },
-        { grade: 'C-', min: 45, max: 49,  weight: 1.75 },
-        { grade: 'D',  min: 40, max: 44,  weight: 1 },
-        { grade: 'F',  min: 0,  max: 39,  weight: 0 }
+  semesterGrades: {
+    1: { 
+      subjects: [
+      { name: 'Mathematics', grade: 3.5, credit: 3 },
+      { name: 'Physics', grade: 4, credit: 4 },
+      { name: 'Chemistry', grade: 3.7, credit: 3 },
+      { name: 'Computer Science', grade: 4, credit: 4 },
+      { name: 'English', grade: 3, credit: 2 },
+      { name: 'History', grade: 3.3, credit: 3 },
       ],
-      unityUniversityGradingScale: [
-        { grade: 'A+', min: 90, max: 100, weight: 4 },
-        { grade: 'A',  min: 80, max: 89,  weight: 4 },
-        { grade: 'B+', min: 75, max: 79,  weight: 3.5 },
-        { grade: 'B',  min: 65, max: 74,  weight: 3 },
-        { grade: 'C+', min: 60, max: 64,  weight: 2.5 },
-        { grade: 'C',  min: 50, max: 59,  weight: 2 },
-        { grade: 'D',  min: 40, max: 49,  weight: 1 },
-        { grade: 'F',  min: 0,  max: 39,  weight: 0 }
-      ]
-    }
+      totalCredits: 19,
+      totalGradePoints: 0,
+      gpa: 0,
+    },
+    2: {
+      subjects: [
+      { name: 'Biology', grade: 4, credit: 3 },
+      { name: 'Statistics', grade: 3.3, credit: 4 },
+      { name: 'Economics', grade: 3.7, credit: 3 },
+      { name: 'Psychology', grade: 4, credit: 4 },
+      { name: 'Philosophy', grade: 3, credit: 2 },
+      { name: 'Sociology', grade: 3.3, credit: 3 },
+      ],
+      totalCredits: 19,
+      totalGradePoints: 0,
+      gpa: 0,
+    
+    },
+    3: {
+      subjects: [
+      { name: 'Advanced Mathematics', grade: 4, credit: 3 },
+      { name: 'Quantum Physics', grade: 3.3, credit: 4 },
+      { name: 'Organic Chemistry', grade: 3.7, credit: 3 },
+      { name: 'Data Structures', grade: 4, credit: 4 },
+      { name: 'Literature', grade: 3, credit: 2 },
+      { name: 'World History', grade: 3.3, credit: 3 },
+      ],
+      totalCredits: 19,
+      totalGradePoints: 0,
+      gpa: 0,
+    },
+    4: {
+      subjects: [
+      { name: 'Genetics', grade: 4, credit: 3 },
+      { name: 'Probability Theory', grade: 3.3, credit: 4 },
+      { name: 'Microeconomics', grade: 3.7, credit: 3 },
+      { name: 'Cognitive Psychology', grade: 4, credit: 4 },
+      { name: 'Ethics', grade: 3, credit: 2 },
+      { name: 'Cultural Studies', grade: 3.3, credit: 3 },
+      ],
+      totalCredits: 19,
+      totalGradePoints: 0,
+      gpa: 0,
+    },
+    5: {
+      subjects: [
+      { name: 'Linear Algebra', grade: 4, credit: 3 },
+      { name: 'Thermodynamics', grade: 3.3, credit: 4 },
+      { name: 'Inorganic Chemistry', grade: 3.7, credit: 3 },
+      { name: 'Algorithms', grade: 4, credit: 4 },
+      { name: 'Creative Writing', grade: 3, credit: 2 },
+      { name: 'Modern History', grade: 3.3, credit: 3 },
+      ],
+      totalCredits: 19,
+      totalGradePoints: 0,
+      gpa: 0,
+    },
+    6: {
+      subjects: [
+      { name: 'Differential Equations', grade: 4, credit: 3 },
+      { name: 'Electromagnetism', grade: 3.3, credit: 4 },
+      { name: 'Physical Chemistry', grade: 3.7, credit: 3 },
+      { name: 'Operating Systems', grade: 4, credit: 4 },
+      { name: 'Rhetoric', grade: 3, credit: 2 },
+      { name: 'Ancient Civilizations', grade: 3.3, credit: 3 },
+      ],
+      totalCredits: 19,
+      totalGradePoints: 0,
+      gpa: 0,
+    },
+  },
+  gradingScales: {
+    ethiopianUniversityGradingScale: [
+    { grade: 'A+', min: 90, max: 100, weight: 4 },
+    { grade: 'A',  min: 85, max: 89,  weight: 4 },
+    { grade: 'A-', min: 80, max: 84,  weight: 3.75 },
+    { grade: 'B+', min: 75, max: 79,  weight: 3.5 },
+    { grade: 'B',  min: 70, max: 74,  weight: 3 },
+    { grade: 'B-', min: 65, max: 69,  weight: 2.75 },
+    { grade: 'C+', min: 60, max: 64,  weight: 2.5 },
+    { grade: 'C',  min: 50, max: 59,  weight: 2 },
+    { grade: 'C-', min: 45, max: 49,  weight: 1.75 },
+    { grade: 'D',  min: 40, max: 44,  weight: 1 },
+    { grade: 'F',  min: 0,  max: 39,  weight: 0 }
+    ],
+    unityUniversityGradingScale: [
+    { grade: 'A+', min: 90, max: 100, weight: 4 },
+    { grade: 'A',  min: 80, max: 89,  weight: 4 },
+    { grade: 'B+', min: 75, max: 79,  weight: 3.5 },
+    { grade: 'B',  min: 65, max: 74,  weight: 3 },
+    { grade: 'C+', min: 60, max: 64,  weight: 2.5 },
+    { grade: 'C',  min: 50, max: 59,  weight: 2 },
+    { grade: 'D',  min: 40, max: 49,  weight: 1 },
+    { grade: 'F',  min: 0,  max: 39,  weight: 0 }
+    ]
+  }
   }
 
 
