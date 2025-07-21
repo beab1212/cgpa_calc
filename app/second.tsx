@@ -79,7 +79,7 @@ export default function Second() {
       <Stack.Screen options={{ headerTitle: () => <CustomHeader viewRef={viewRef} /> }} />
       <View className="flex-1 bg-white">
         <Text className="text-sm text-gray-500 mb-4 py-4 px-6 bg-blue-100">
-          You have to enter at least 2 of your semester "SGPA" to calculate CGPA
+          You must have at least 2 semester "SGPA" to calculate CGPA
         </Text>
 
         <ScrollView className="flex-1 px-4" ref={viewRef}>
@@ -132,6 +132,18 @@ export default function Second() {
             <Text className="text-gray-400 text-center py-8">No semester grades entered yet.</Text>
           )}
         </ScrollView>
+
+        <View className='p-4 bg-[#f8fafb] shadow-md rounded-lg mb-4 h-56'>
+          <View className='flex-row items-center justify-between mb-6 border-b border-gray-200 pb-4'>
+            <Text className='font-bold text-gray-400'>Your Cumulative GPA</Text>
+            <Text className='font-bold'>{'N/A'}</Text>
+          </View>
+
+          <TouchableOpacity className='bg-gray-400z p-4 mx-1 mt-4 rounded-lg flex-row border-2 border-gray-300 items-center justify-center'>
+            <icons.calculator fill={'#4b5563'} width={24} height={24} />
+            <Text className='text-gray-600 font-semibold pl-1'>Calculate CGPA</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );

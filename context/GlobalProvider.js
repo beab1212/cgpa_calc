@@ -36,6 +36,7 @@ const templateData = {
     
     }
   },
+  cgpa: 0,
   gradingScales: {
     ethiopianUniversityGradingScale: [
     { grade: 'A+', min: 90, max: 100, weight: 4 },
@@ -139,6 +140,14 @@ export const GlobalProvider = ({ children }) => {
 
     const gpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : '0.00';
 
+    // calculate CGPA
+    const currentCGPA = data.cgpa || 0;
+    const currentTotalCredits = Object.values(data.semesterGrades).reduce((acc, semester) => acc + semester.totalCredits, 0);
+    const newTotalCredits = currentTotalCredits + totalCredits;
+    const newTotalPoints = Object.values(data.semesterGrades).reduce((acc, semester) => acc + semester.totalGradePoints, 0) + totalPoints;
+
+    const newCGPA = newTotalCredits > 0 ? (newTotalPoints / newTotalCredits).toFixed(2) : '0.00';
+
     setData((prevData) => ({
       ...prevData,
       semesterGrades: {
@@ -149,7 +158,8 @@ export const GlobalProvider = ({ children }) => {
           totalPoints,
           gpa
         }
-      }
+      },
+      cgpa: newCGPA,
     }));
     saveData();
     Toast.show({
