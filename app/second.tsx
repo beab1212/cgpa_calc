@@ -136,7 +136,7 @@ export default function Second() {
         <View className='p-4 bg-[#f8fafb] shadow-md rounded-lg mb-4 h-56'>
           <View className='flex-row items-center justify-between mb-6 border-b border-gray-200 pb-4'>
             <Text className='font-bold text-gray-400'>Your Cumulative GPA</Text>
-            <Text className='font-bold'>{'N/A'}</Text>
+            <Text className='font-bold'>{data?.cgpa ? data.cgpa : 'N/A'}</Text>
           </View>
 
           <TouchableOpacity className='bg-gray-400z p-4 mx-1 mt-4 rounded-lg flex-row border-2 border-gray-300 items-center justify-center'>

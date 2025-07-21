@@ -7,35 +7,34 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 const GlobalContext = createContext();
 
 const templateData = {
-  semesterGrades: {
-    1: { 
-      subjects: [
-      { name: 'Mathematics', grade: 3.5, credit: 3 },
-      { name: 'Physics', grade: 4, credit: 4 },
-      { name: 'Chemistry', grade: 3.7, credit: 3 },
-      { name: 'Computer Science', grade: 4, credit: 4 },
-      { name: 'English', grade: 3, credit: 2 },
-      { name: 'History', grade: 3.3, credit: 3 },
-      ],
-      totalCredits: 19,
-      totalGradePoints: 0,
-      gpa: 0,
-    },
-    2: {
-      subjects: [
-      { name: 'Biology', grade: 4, credit: 3 },
-      { name: 'Statistics', grade: 3.3, credit: 4 },
-      { name: 'Economics', grade: 3.7, credit: 3 },
-      { name: 'Psychology', grade: 4, credit: 4 },
-      { name: 'Philosophy', grade: 3, credit: 2 },
-      { name: 'Sociology', grade: 3.3, credit: 3 },
-      ],
-      totalCredits: 19,
-      totalGradePoints: 0,
-      gpa: 0,
-    
-    }
-  },
+  // semesterGrades: {
+  //   1: { 
+  //     subjects: [
+  //     { name: 'Mathematics', grade: 3.5, credit: 3 },
+  //     { name: 'Physics', grade: 4, credit: 4 },
+  //     { name: 'Chemistry', grade: 3.7, credit: 3 },
+  //     { name: 'Computer Science', grade: 4, credit: 4 },
+  //     { name: 'English', grade: 3, credit: 2 },
+  //     { name: 'History', grade: 3.3, credit: 3 },
+  //     ],
+  //     totalCredits: 19,
+  //     totalGradePoints: 0,
+  //     gpa: 0,
+  //   },
+  //   2: {
+  //     subjects: [
+  //     { name: 'Biology', grade: 4, credit: 3 },
+  //     { name: 'Statistics', grade: 3.3, credit: 4 },
+  //     { name: 'Economics', grade: 3.7, credit: 3 },
+  //     { name: 'Psychology', grade: 4, credit: 4 },
+  //     { name: 'Philosophy', grade: 3, credit: 2 },
+  //     { name: 'Sociology', grade: 3.3, credit: 3 },
+  //     ],
+  //     totalCredits: 19,
+  //     totalGradePoints: 0,
+  //     gpa: 0,
+  //   }
+  // },
   cgpa: 0,
   gradingScales: {
     ethiopianUniversityGradingScale: [
@@ -77,7 +76,7 @@ export const GlobalProvider = ({ children }) => {
     try {
       const jsonValue = JSON.stringify(data);
       await AsyncStorage.setItem('grade_app_data', jsonValue);
-      console.log('Data saved successfully:', jsonValue);
+      // console.log('Data saved successfully:', jsonValue);
     } catch (e) {
       console.error('Error saving data:', e);
     }
@@ -141,10 +140,9 @@ export const GlobalProvider = ({ children }) => {
     const gpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : '0.00';
 
     // calculate CGPA
-    const currentCGPA = data.cgpa || 0;
-    const currentTotalCredits = Object.values(data.semesterGrades).reduce((acc, semester) => acc + semester.totalCredits, 0);
+    const currentTotalCredits = Object.values(data?.semesterGrades || {}).reduce((acc, semester) => acc + semester.totalCredits, 0);
     const newTotalCredits = currentTotalCredits + totalCredits;
-    const newTotalPoints = Object.values(data.semesterGrades).reduce((acc, semester) => acc + semester.totalGradePoints, 0) + totalPoints;
+    const newTotalPoints = Object.values(data?.semesterGrades || {}).reduce((acc, semester) => acc + semester.totalGradePoints, 0) + totalPoints;
 
     const newCGPA = newTotalCredits > 0 ? (newTotalPoints / newTotalCredits).toFixed(2) : '0.00';
 
@@ -155,7 +153,7 @@ export const GlobalProvider = ({ children }) => {
         [semesterNumber]: { 
           subjects: subjects || [],
           totalCredits,
-          totalPoints,
+          totalGradePoints: totalPoints,
           gpa
         }
       },
@@ -167,10 +165,15 @@ export const GlobalProvider = ({ children }) => {
       text1: 'Success',
       text2: `Semester ${semesterNumber} saved successfully!`,
     });
-    console.log(`Semester ${semesterNumber} added with subjects:`, subjects);
+    console.log("Debug: Semester data saved:", {
+      newTotalCredits,
+      newTotalPoints,
+      cgpa: newCGPA
+    });
+    
   };
 
-  console.log('GlobalProvider data initialized:', data);
+  // console.log('GlobalProvider data initialized:', data);
 
   useEffect(() => {
     const fetchData = async () => {
