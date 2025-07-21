@@ -2,6 +2,7 @@
 import { Stack } from 'expo-router';
 import { View, Text, Button, ScrollView, Touchable, TouchableOpacity } from 'react-native';
 import { icons } from '../assets';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 function CustomHeader() {
   return (
@@ -31,6 +32,7 @@ function GradeInput({ semester = 1, cgpa = 0 }) {
 }
 
 export default function Second() {
+  const { data } = useGlobalContext();
   return (
     <>
       <Stack.Screen options={{ headerTitle: () => <CustomHeader /> }} />
@@ -42,21 +44,13 @@ export default function Second() {
         
         
         <ScrollView className='flex-1 px-4'>
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={1} cgpa={3.5} />
-          <GradeInput semester={8} cgpa={3.5} />
+          {Object.keys(data?.semesterGrades || {}).map((key) => {
+            const semester = data?.semesterGrades[key];
+            return (
+              <GradeInput key={key} semester={semester?.semester} cgpa={semester?.cgpa} />
+            );
+          })}
+
         </ScrollView>
 
         <View className='p-4 bg-[#f8fafb] shadow-md rounded-lg mb-4 h-56'>

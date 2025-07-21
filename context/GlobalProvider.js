@@ -47,46 +47,7 @@ const templateData = {
       totalCredits: 19,
       totalGradePoints: 0,
       gpa: 0,
-    },
-    4: {
-      subjects: [
-      { name: 'Genetics', grade: 4, credit: 3 },
-      { name: 'Probability Theory', grade: 3.3, credit: 4 },
-      { name: 'Microeconomics', grade: 3.7, credit: 3 },
-      { name: 'Cognitive Psychology', grade: 4, credit: 4 },
-      { name: 'Ethics', grade: 3, credit: 2 },
-      { name: 'Cultural Studies', grade: 3.3, credit: 3 },
-      ],
-      totalCredits: 19,
-      totalGradePoints: 0,
-      gpa: 0,
-    },
-    5: {
-      subjects: [
-      { name: 'Linear Algebra', grade: 4, credit: 3 },
-      { name: 'Thermodynamics', grade: 3.3, credit: 4 },
-      { name: 'Inorganic Chemistry', grade: 3.7, credit: 3 },
-      { name: 'Algorithms', grade: 4, credit: 4 },
-      { name: 'Creative Writing', grade: 3, credit: 2 },
-      { name: 'Modern History', grade: 3.3, credit: 3 },
-      ],
-      totalCredits: 19,
-      totalGradePoints: 0,
-      gpa: 0,
-    },
-    6: {
-      subjects: [
-      { name: 'Differential Equations', grade: 4, credit: 3 },
-      { name: 'Electromagnetism', grade: 3.3, credit: 4 },
-      { name: 'Physical Chemistry', grade: 3.7, credit: 3 },
-      { name: 'Operating Systems', grade: 4, credit: 4 },
-      { name: 'Rhetoric', grade: 3, credit: 2 },
-      { name: 'Ancient Civilizations', grade: 3.3, credit: 3 },
-      ],
-      totalCredits: 19,
-      totalGradePoints: 0,
-      gpa: 0,
-    },
+    }
   },
   gradingScales: {
     ethiopianUniversityGradingScale: [
