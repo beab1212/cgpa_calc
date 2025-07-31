@@ -16,6 +16,7 @@
       "supportsTablet": true
     },
     "android": {
+      "jsEngine": "jsc",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -26,6 +27,12 @@
     "web": {
       "bundler": "metro",
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "439b615a-b655-48ae-9e64-ee591192c319"
+      }
+    },
+    "owner": "sahik80005"
   }
 }

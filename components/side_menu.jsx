@@ -35,14 +35,14 @@ export default function SideMenu() {
 
       {/* Footer Section */}
     <View className="border-t border-gray-200 py-6">
-      <Text className="text-sm text-gray-500">Made by Parrobaba</Text>
+      <Text className="text-sm text-gray-500">Made by Beab</Text>
 
       <Text className="text-sm text-gray-500 mt-2">Follow me:</Text>
 
       <View className="flex-row space-x-3 mt-2">
         <Text
           className="text-sm text-blue-500 font-medium"
-          onPress={() => Linking.openURL('https://www.linkedin.com/in/parrobaba')}
+          onPress={() => Linking.openURL('https://www.linkedin.com/in/beabdev/')}
         >
           LinkedIn
         </Text>
@@ -58,7 +58,7 @@ export default function SideMenu() {
         <Text className="text-sm text-gray-400 px-2">|</Text>
         <Text
           className="text-sm text-blue-500 font-medium"
-          onPress={() => Linking.openURL('https://t.me/parrobaba')}
+          onPress={() => Linking.openURL('https://t.me/https://t.me/beabDev')}
         >
           Telegram
         </Text>
