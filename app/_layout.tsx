@@ -11,6 +11,7 @@ export default function RootLayout() {
             <Stack>
                 <Stack.Screen name="index" options={{ title: "Home" }} />
                 <Stack.Screen name="second" options={{ title: "Second Screen" }} />
+                <Stack.Screen name="edit_grade" options={{ title: "Edit Grade" }} />
             </Stack>
         </GlobalProvider>
         

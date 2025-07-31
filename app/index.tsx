@@ -9,7 +9,7 @@ import { useGlobalContext } from '../context/GlobalProvider';
 const { width: screenWidth } = Dimensions.get('window');
 
 function CustomHeader() {
-  const { toggleMenu } = useGlobalContext();
+  const { toggleMenu, data } = useGlobalContext();
   return (
     <View className='flex-row justify-between'>
       <View className='flex-row items-center'>
@@ -28,6 +28,10 @@ function CustomHeader() {
 
 export default function Home() {
   const navigation = useNavigation();
+  const { data } = useGlobalContext();
+  
+
+
 
   return (
     <>
@@ -38,14 +42,25 @@ export default function Home() {
         <View className='mx-4 py-2 bg-white shadow-md rounded-lg mb-4 w-11/12'>
           <Text className='font-bold text-xl px-8 py-2 text-gray-700'>Your Progress</Text>
           <LineChart
-            data={{
-              labels: ['S-1', 'S-2', 'S-3', 'S-4', 'S-5', 'S-6', 'S-7', 'S-8'],
-              datasets: [
-                {
-                  data: [1.00, 2.00, 3.00, 4.00, 3.50, 3.75, 4.00, 3.80],
-                },
-              ],
-            }}
+            data={
+              data?.semesterGrades && Object.keys(data.semesterGrades).length > 0
+                ? {
+                    labels: Object.values(data.semesterGrades).map((_: any, index: number) => `S-${index + 1}`),
+                    datasets: [
+                      {
+                        data: Object.values(data.semesterGrades).map((semester: any) => Number.parseInt(semester.gpa)),
+                      },
+                    ],
+                  }
+                : {
+                    labels: ['No Data'],
+                    datasets: [
+                      {
+                        data: [0],
+                      },
+                    ],
+                  }
+            }
             width={screenWidth - 60}
             height={200}
             chartConfig={{
@@ -93,7 +108,7 @@ export default function Home() {
           </TouchableOpacity>
 
           {/* Edit Grades */}
-          <TouchableOpacity className="flex-row items-center rounded-2xl p-4 bg-white shadow-md" onPress={() => console.log('Pressed')}>
+          <TouchableOpacity className="flex-row items-center rounded-2xl p-4 bg-white shadow-md" onPress={() => navigation.navigate("edit_grade")}>
             <View className="bg-purple-100 p-3 rounded-full mr-4">
               <icons.edit className="w-10 h-10" fill="#9333ea" />
             </View>

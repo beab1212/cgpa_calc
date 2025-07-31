@@ -148,6 +148,7 @@ export default function Second() {
                 <TextInput
                   className="border border-gray-300 rounded-lg px-3 py-2 w-24 text-center mr-2"
                   placeholder="Grade"
+                  keyboardType="numeric"
                   value={_.grade || ''}
                   onChange={(text) => {
                     if (text.nativeEvent.text === '') {
